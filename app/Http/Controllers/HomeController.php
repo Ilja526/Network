@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = auth()->guard('web')->user()->posts;
+        return view('home', compact('posts'));
     }
 }

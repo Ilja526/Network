@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -20,10 +22,11 @@ Route::get('/', function () {
 
 
 Route::group(['middleware'=>'auth'], static function (){
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/post/create', [PostController::class, 'create'])->name('post.create');
+    Route::post('/post/delete/{post}', [PostController::class, 'delete'])->name('post.delete');
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
