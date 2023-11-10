@@ -12,7 +12,7 @@
                 {{ $post->content }}
                 <form action="{{ route('post.delete',$post) }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger">delete</button>
+                    <button type="submit" class="btn btn-danger float-end">delete</button>
                 </form>
             </div>
         </div>
