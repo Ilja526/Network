@@ -23,7 +23,8 @@ class PostCreateValidationRequest extends FormRequest
     {
         return [
             'content'=>'nullable|string|max:999',
-            'image'=>'nullable|image|mimes:jpg,png,jpeg|max:2048'
+            'image'=>'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'file'=>'nullable|file|mimes:docx,pdf,xlsx|max:2048'
         ];
     }
 }

@@ -27,6 +27,7 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post/delete/{post}', [PostController::class, 'delete'])->name('post.delete');
+    Route::get('/friends/search', [HomeController::class, 'searchPost'])->name('post.search');
 });
 
 Auth::routes();

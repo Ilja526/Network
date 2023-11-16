@@ -29,10 +29,16 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
+                    @if (auth()->guard('web')->user())
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item">
+                            <form method="GET" action="{{ route('post.search') }}">
+                                <input type="text" class="form-control" name="name">
+                                <button class="btn btn-sm btn-primary">Search</button>
+                            </form>
+                        </li>
                     </ul>
-
+                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
