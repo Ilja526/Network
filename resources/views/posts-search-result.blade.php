@@ -6,6 +6,8 @@
         @include('post', ['post' => $post, 'allowDelete' => false])
     @endforeach
 @else
-    Friends not found
+    <div class="alert alert-danger text-lg-center" role="alert">
+        Friends not found
+    </div>
 @endif
 @endsection
