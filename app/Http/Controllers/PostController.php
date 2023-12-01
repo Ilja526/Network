@@ -36,18 +36,21 @@ class PostController extends Controller
         }
 
         $filename = null;
+        $FileOriginName = null;
         $file = $request->validated('file');
         if($file){
             $extension = $file->extension();
             $filename = $extension === '' ? Str::uuid() : sprintf('%s.%s', Str::uuid(), $extension);
             $file->storeAs('files', $filename, 'public');
+            $FileOriginName = $file->getClientOriginalName();
         }
 
         Post::create([
             'user_id'=>$user->id,
             'content'=>$request->validated('content'),
             'image'=>$imageFilename,
-            'file'=>$filename
+            'file'=>$filename,
+            'file_origin_name'=>$FileOriginName
         ]);
 
         return redirect()->route('home')->with('success', 'Post has been created.');

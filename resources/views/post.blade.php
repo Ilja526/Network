@@ -8,7 +8,7 @@
         {{ $post->content }}
         @if($post->file)
             <br>
-            <a href="{{ sprintf('/storage/files/%s', $post->file) }}">Attachment</a>
+            <a href="{{ sprintf('/storage/files/%s', $post->file) }}">{{ $post->file_origin_name }}</a>
         @endif
         @if($allowDelete)
         <form action="{{ route('post.delete',$post) }}" method="POST">

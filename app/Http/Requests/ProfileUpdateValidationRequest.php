@@ -24,6 +24,7 @@ class ProfileUpdateValidationRequest extends FormRequest
         $userId = auth()->guard('web')->user()->id;
         return [
             'name'=>'required|string|min:3|max:100',
+            'image'=>'nullable|image|mimes:jpg,png,jpeg|max:2048',
             'email'=>'required|email|max:255|unique:users,email,'.$userId,
             'password'=>'nullable|string|min:8|max:255|confirmed'
         ];

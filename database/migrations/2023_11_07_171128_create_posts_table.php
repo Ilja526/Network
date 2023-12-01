@@ -16,6 +16,7 @@ return new class extends Migration
             $table->longText('content')->nullable();
             $table->text('image')->nullable();
             $table->text('file')->nullable();
+            $table->text('file_origin_name')->nullable();
             $table->unsignedBigInteger('user_id')->index();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

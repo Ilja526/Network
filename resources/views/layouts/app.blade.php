@@ -33,8 +33,14 @@
                     <ul class="navbar-nav m-auto">
                         <li class="nav-item">
                             <form method="GET" action="{{ route('post.search') }}">
-                                <input type="text" class="form-control" name="name">
-                                <button class="btn btn-sm btn-primary">Search</button>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" name="name">
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-sm btn-primary">Search</button>
+                                    </div>
+                                </div>
                             </form>
                         </li>
                     </ul>
@@ -57,9 +63,11 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    @if(Auth::user()->image)
+                                        <img class="img-thumbnail" style="max-height: 50px" src="{{ sprintf('/storage/images/%s', Auth::user()->image) }}">
+                                    @endif
                                     {{ Auth::user()->name }}
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
