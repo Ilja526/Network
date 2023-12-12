@@ -82,6 +82,10 @@
 
                                         {{ __('Profile') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('friend.search') }}">
+
+                                        {{ __('Friends') }}
+                                    </a>
                                 </div>
                             </li>
                         @endguest
