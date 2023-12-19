@@ -7,7 +7,7 @@
     @endforeach
 @else
     <div class="alert alert-danger text-lg-center" role="alert">
-        Friends not found
+        Posts not found
     </div>
 @endif
 @endsection
