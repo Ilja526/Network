@@ -12,14 +12,14 @@ class Friendship extends Model
 
     protected $fillable = ['user_first','user_second'];
 
-    public function user_first(): BelongsTo
+    public function user_first(): User
     {
-        return $this->belongsTo(User::class);
+        return User::find($this->user_first);
     }
 
 
-    public function user_second(): BelongsTo
+    public function user_second(): User
     {
-        return $this->belongsTo(User::class);
+        return User::find($this->user_second);
     }
 }

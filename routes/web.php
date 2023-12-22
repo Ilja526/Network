@@ -30,6 +30,10 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::post('/post/delete/{post}', [PostController::class, 'delete'])->name('post.delete');
     Route::get('/post/search', [HomeController::class, 'searchPost'])->name('post.search');
     Route::get('/friends/search', [FriendsController::class, 'searchFriends'])->name('friend.search');
+    Route::post('/friends/request/{user}', [FriendsController::class, 'sendFriendRequest'])->name('friend.request');
+    Route::post('/friends/invite/{invite}/accept', [FriendsController::class, 'acceptFriendship'])->name('friend.accept');
+    Route::post('/friends/invite/{invite}/reject', [FriendsController::class, 'rejectFriendship'])->name('friend.reject');
+
 });
 
 Auth::routes();

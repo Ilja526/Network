@@ -12,14 +12,14 @@ class Invite extends Model
 
     protected $fillable = ['user_from','user_to'];
 
-    public function user_from(): BelongsTo
+    public function user_from(): User
     {
-        return $this->belongsTo(User::class);
+        return User::find($this->user_from);
     }
 
 
-    public function user_to(): BelongsTo
+    public function user_to(): User
     {
-        return $this->belongsTo(User::class);
+        return User::find($this->user_to);
     }
 }
