@@ -10,6 +10,7 @@
                         <li class="list-group-item">{{ $friendship->user_first()->name}}
                             friendly
                             {{ $friendship->user_second()->name}}
+                            <a href="{{ route("messages.show", $friendship) }}">Messages</a>
                         </li>
                     @endforeach
                 </ul>

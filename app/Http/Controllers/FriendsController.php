@@ -16,7 +16,11 @@ class FriendsController extends Controller
         $users = null;
 
         if($content && !is_array($content)){
-            $users = User::where('email', 'like', sprintf('%%%s%%', $content))
+            $users = User::where('email', 'like', sprintf('%%%s%%', $content))->whereNotIn('id', function($query) use($user) {
+                $query->select('user_first')->from('friendships')->where('user_first', $user->id)->orWhere('user_second', $user->id);
+            })->whereNotIn('id', function($query) use($user) {
+                $query->select('user_second')->from('friendships')->where('user_first', $user->id)->orWhere('user_second', $user->id);
+            })
                 ->where('id', '!=', $user->id)->get();
 
         }

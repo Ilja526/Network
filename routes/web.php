@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -33,7 +34,8 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::post('/friends/request/{user}', [FriendsController::class, 'sendFriendRequest'])->name('friend.request');
     Route::post('/friends/invite/{invite}/accept', [FriendsController::class, 'acceptFriendship'])->name('friend.accept');
     Route::post('/friends/invite/{invite}/reject', [FriendsController::class, 'rejectFriendship'])->name('friend.reject');
-
+    Route::get('/messages/show/{friendship}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/create/{friendship}', [MessageController::class, 'create'])->name('messages.create');
 });
 
 Auth::routes();
