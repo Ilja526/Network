@@ -82,7 +82,12 @@
                     <br>
                     <a href="{{ sprintf('/storage/files/%s', $message->file) }}">{{ $message->file_origin_name }}</a>
                 @endif
-
+                @if(Auth::user()->id == $message->user_id)
+                    <form action="{{ route('messages.delete',$message) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger float-end">delete</button>
+                    </form>
+                @endif
             </div>
         </div>
     @endforeach

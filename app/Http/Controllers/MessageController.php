@@ -47,4 +47,12 @@ class MessageController extends Controller
 
         return redirect()->back()->with('success', 'Message has been created.');
     }
+
+    public function delete(Message $message){
+        $user = auth()->guard('web')->user();
+        if($user->id == $message->user_id){
+            $message->delete();
+        }
+        return redirect()->back()->with('success', 'Message has been delete.');
+    }
 }

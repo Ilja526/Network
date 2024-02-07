@@ -37,6 +37,7 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::post('/friends/invite/{invite}/reject', [FriendsController::class, 'rejectFriendship'])->name('friend.reject');
     Route::get('/messages/show/{friendship}', [MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/create/{friendship}', [MessageController::class, 'create'])->name('messages.create');
+    Route::post('/messages/delete/{message}', [MessageController::class, 'delete'])->name('messages.delete');
     Route::get('/moderator/users', [ModeratorDashboardController::class, 'users'])->name('moderator.users');
     Route::get('/moderator/{user}/posts', [ModeratorDashboardController::class, 'posts'])->name('moderator.posts');
     Route::post('/moderator/{post}/delete-post', [ModeratorDashboardController::class, 'deletePost'])->name('moderator.delete-post');
