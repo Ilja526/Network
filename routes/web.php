@@ -3,6 +3,7 @@
 use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ModeratorDashboardController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -36,6 +37,11 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::post('/friends/invite/{invite}/reject', [FriendsController::class, 'rejectFriendship'])->name('friend.reject');
     Route::get('/messages/show/{friendship}', [MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/create/{friendship}', [MessageController::class, 'create'])->name('messages.create');
+    Route::get('/moderator/users', [ModeratorDashboardController::class, 'users'])->name('moderator.users');
+    Route::get('/moderator/{user}/posts', [ModeratorDashboardController::class, 'posts'])->name('moderator.posts');
+    Route::post('/moderator/{post}/delete-post', [ModeratorDashboardController::class, 'deletePost'])->name('moderator.delete-post');
+    Route::post('/moderator/{user}/create-moderator', [ModeratorDashboardController::class, 'createModerator'])->name('moderator.create-moderator');
+    Route::post('/moderator/{user}/delete-moderator', [ModeratorDashboardController::class, 'deleteModerator'])->name('moderator.delete-moderator');
 });
 
 Auth::routes();

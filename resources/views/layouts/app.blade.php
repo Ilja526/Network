@@ -86,6 +86,13 @@
 
                                         {{ __('Friends') }}
                                     </a>
+                                    @if(Auth::user()->moderator)
+
+                                        <a class="dropdown-item" href="{{ route('moderator.users') }}">
+
+                                            {{ __('Users') }}
+                                        </a>
+                                    @endif
                                 </div>
                             </li>
                         @endguest
