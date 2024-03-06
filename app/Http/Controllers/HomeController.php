@@ -44,7 +44,6 @@ class HomeController extends Controller
             })->get();
         }
 
-
         return view('posts-search-result', compact('posts'));
     }
 }

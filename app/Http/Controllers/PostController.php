@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentValidationRequest;
 use App\Http\Requests\PostCreateValidationRequest;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -56,4 +58,22 @@ class PostController extends Controller
         return redirect()->route('home')->with('success', 'Post has been created.');
     }
 
+    public function createComment(CommentValidationRequest $request, Post $post){
+        $user = auth()->guard('web')->user();
+        Comment::create([
+            'user_id'=>$user->id,
+            'content'=>$request->validated('content'),
+            'post_id'=>$post->id
+        ]);
+        return redirect()->back();
+    }
+
+    public function deleteComment(Comment $comment){
+        $user = auth()->guard('web')->user();
+        if((int)$user->id === $comment->user_id){
+           $comment->delete();
+        }
+
+        return redirect()->back();
+    }
 }

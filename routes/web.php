@@ -43,6 +43,10 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::post('/moderator/{post}/delete-post', [ModeratorDashboardController::class, 'deletePost'])->name('moderator.delete-post');
     Route::post('/moderator/{user}/create-moderator', [ModeratorDashboardController::class, 'createModerator'])->name('moderator.create-moderator');
     Route::post('/moderator/{user}/delete-moderator', [ModeratorDashboardController::class, 'deleteModerator'])->name('moderator.delete-moderator');
+    Route::get('/moderator/{user}/messages', [ModeratorDashboardController::class, 'messages'])->name('moderator.messages');
+    Route::post('/moderator/{message}/delete-messages', [ModeratorDashboardController::class, 'deleteMessage'])->name('moderator.delete-message');
+    Route::post('/comment/create/{post}', [PostController::class, 'createComment'])->name('comment.create');
+    Route::post('/comment/delete/{comment}', [PostController::class, 'deleteComment'])->name('comment.delete');
 });
 
 Auth::routes();

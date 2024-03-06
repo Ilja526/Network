@@ -14,7 +14,8 @@
                                 {{ $user->name }}
                                 ({{ $user->email }})
                                 <a href="{{ route('moderator.posts', $user) }}">Posts</a>
-                                @if(!$user->moderator)
+                                <a href="{{ route('moderator.messages', $user) }}">Messages</a>
+                            @if(!$user->moderator)
                                 <form class="d-inline" action="{{ route('moderator.create-moderator',$user) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-success btn btn-sm float-end">Create Moderator</button>

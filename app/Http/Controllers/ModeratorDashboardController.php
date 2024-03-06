@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -45,6 +46,16 @@ class ModeratorDashboardController extends Controller
         if($user->moderator){
             $user->update(['moderator'=> false]);
         }
+        return redirect()->back();
+    }
+
+    public function messages(User $user){
+        $messages = Message::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+        return view('moderator-messages', compact('messages', 'user'));
+    }
+
+    public function deleteMessage(Message $message){
+        $message->delete();
         return redirect()->back();
     }
 }
