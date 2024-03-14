@@ -56,7 +56,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <button type="submit" class="btn btn-danger float-end">Comment</button>
+                    <button type="submit" class="btn btn-success float-end">Comment</button>
                 </div>
             </div>
         </form>
