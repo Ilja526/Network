@@ -75,7 +75,9 @@
                 <img class="card-img-top" src="{{ sprintf('/storage/images/%s', $message->image) }}">
             @endif
             <div class="card-body">
-                {{$message->user->name}} | {{$message->created_at}}
+                @if(Auth::user()->image)
+                    <img class="img-thumbnail" style="max-height: 50px" src="{{ sprintf('/storage/images/%s', Auth::user()->image) }}">
+                @endif | {{$message->user->name}} | {{$message->created_at}}
                 <br>
                 {{ $message->content }}
                 @if($message->file)
