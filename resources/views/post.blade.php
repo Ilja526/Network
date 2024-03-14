@@ -3,7 +3,9 @@
         <img class="card-img-top" src="{{ sprintf('/storage/images/%s', $post->image) }}">
     @endif
     <div class="card-body">
-        {{$post->user->name}} | {{$post->created_at}}
+        @if(Auth::user()->image)
+            <img class="img-thumbnail" style="max-height: 50px" src="{{ sprintf('/storage/images/%s', Auth::user()->image) }}">
+        @endif | {{$post->user->name}} | {{$post->created_at}}
         <br>
         {{ $post->content }}
         @if($post->file)
