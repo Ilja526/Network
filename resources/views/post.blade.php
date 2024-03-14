@@ -26,7 +26,9 @@
         <div class="row">
             @foreach($post->comments as $comment)
                 <div class="col-12">
-                    {{ $comment->user->name }}: {{ $comment->content }}
+                    @if(Auth::user()->image)
+                        <img class="img-thumbnail" style="max-height: 40px" src="{{ sprintf('/storage/images/%s', Auth::user()->image) }}">
+                    @endif | {{ $comment->user->name }}: {{ $comment->content }}
                     @if((int)Auth::user()->id === (int)$comment->user_id)
                     <form action="{{ route('comment.delete', $comment) }}" method="POST">
                         @csrf
