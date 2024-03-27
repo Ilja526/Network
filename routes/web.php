@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FriendsController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ModeratorDashboardController;
@@ -47,6 +48,10 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::post('/moderator/{message}/delete-messages', [ModeratorDashboardController::class, 'deleteMessage'])->name('moderator.delete-message');
     Route::post('/comment/create/{post}', [PostController::class, 'createComment'])->name('comment.create');
     Route::post('/comment/delete/{comment}', [PostController::class, 'deleteComment'])->name('comment.delete');
+    Route::get('/groups', [GroupController::class, 'index'])->name('group.index');
+    Route::get('/group/create/', [GroupController::class, 'create'])->name('group.create');
+    Route::post('/group/store/', [GroupController::class, 'store'])->name('group.store');
+    Route::post('/group/{group}/update/', [GroupController::class, 'update'])->name('group.update');
 });
 
 Auth::routes();

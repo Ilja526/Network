@@ -86,6 +86,10 @@
 
                                         {{ __('Friends') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('group.index') }}">
+
+                                        {{ __('Groups') }}
+                                    </a>
                                     @if(Auth::user()->moderator)
 
                                         <a class="dropdown-item" href="{{ route('moderator.users') }}">
