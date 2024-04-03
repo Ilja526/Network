@@ -16,6 +16,27 @@
                 </ul>
             @endif
         </div>
+
+        <div class="col-lg-12 mb-3">
+            @if($groupInvites->count())
+                <ul class="list-group mt-3">
+                    @foreach($groupInvites as $groupInvite)
+                        <li class="list-group-item">
+                           {{ $groupInvite->group->name }}
+                            <form class="d-inline" action="{{ route('group.accept-invite', $groupInvite) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-success">Accept</button>
+                            </form>
+                            <form class="d-inline" action="{{ route('group.reject-invite', $groupInvite) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-danger">Reject</button>
+                            </form>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+
         <div class="col-lg-12">
             @if($invites->count())
                 <ul class="list-group mt-3">
@@ -66,11 +87,32 @@
                     <ul class="list-group mt-3">
                         @foreach($users as $user)
                             <li class="list-group-item">{{ $user->name }}
+                                @if(isset($noneFriendUsers[$user->id]))
                             <form action="{{ route('friend.request', $user) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-sm btn-primary">Request Friendship</button>
                             </form>
+                                @endif
 
+                                @foreach($groups as $group)
+                                    <div class="row p-3">
+                                        <div class="col-6">
+                                            {{ $group->name }}
+                                        </div>
+                                        @if(empty($group->users->keyBy('id')[$user->id]) && empty($group->groupInvites->keyBy('user_id')[$user->id]))
+
+
+                                        <div class="col-6 text-end">
+                                            <form method="POST" action="{{ route("group.invite", ['group' => $group, 'user' => $user]) }}">
+                                                @csrf
+
+                                                <button type="submit" class="btn btn-success">Invite</button>
+                                            </form>
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                @endforeach
                             </li>
                         @endforeach
                     </ul>

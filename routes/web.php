@@ -52,6 +52,11 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::get('/group/create/', [GroupController::class, 'create'])->name('group.create');
     Route::post('/group/store/', [GroupController::class, 'store'])->name('group.store');
     Route::post('/group/{group}/update/', [GroupController::class, 'update'])->name('group.update');
+    Route::get('/group/{group}/edit/', [GroupController::class, 'edit'])->name('group.edit');
+    Route::post('/group/{group}/delete/', [GroupController::class, 'delete'])->name('group.delete');
+    Route::post('/group/{group}/{user}/invite/', [GroupController::class, 'invite'])->name('group.invite');
+    Route::post('/group/{group_invite}/accept/', [GroupController::class, 'acceptInvite'])->name('group.accept-invite');
+    Route::post('/group/{group_invite}/reject/', [GroupController::class, 'rejectInvite'])->name('group.reject-invite');
 });
 
 Auth::routes();

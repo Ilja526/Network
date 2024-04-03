@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Friendship;
+use App\Models\Group;
+use App\Models\GroupInvite;
 use App\Models\Invite;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,19 +16,25 @@ class FriendsController extends Controller
         $user = auth()->guard('web')->user();
         $content = $request->get('content');
         $users = null;
+        $noneFriendUsers = collect([]);
 
         if($content && !is_array($content)){
-            $users = User::where('email', 'like', sprintf('%%%s%%', $content))->whereNotIn('id', function($query) use($user) {
+            $users = User::where('email', 'like', sprintf('%%%s%%', $content))
+                ->where('id', '!=', $user->id)->get();
+
+            $noneFriendUsers = User::where('email', 'like', sprintf('%%%s%%', $content))
+                ->whereNotIn('id', function($query) use($user) {
                 $query->select('user_first')->from('friendships')->where('user_first', $user->id)->orWhere('user_second', $user->id);
             })->whereNotIn('id', function($query) use($user) {
                 $query->select('user_second')->from('friendships')->where('user_first', $user->id)->orWhere('user_second', $user->id);
-            })
-                ->where('id', '!=', $user->id)->get();
+            })->where('id', '!=', $user->id)->get()->keyBy('id');
 
         }
         $invites = Invite::where('user_to', $user->id)->get();
+        $groups = Group::where('user_id', $user->id)->get();
+        $groupInvites = GroupInvite::where('user_id', $user->id)->get();
         $friendships = Friendship::where('user_first', $user->id)->orWhere('user_second', $user->id)->get();
-        return view('search-friends', compact('users', 'invites', 'friendships'));
+        return view('search-friends', compact('users', 'invites', 'friendships', 'noneFriendUsers', 'groups', 'groupInvites'));
     }
 
     public function sendFriendRequest(User $user)
