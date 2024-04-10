@@ -16,7 +16,7 @@
                         @foreach($user->groups as $group)
                             <div class="row">
                                 <div class="col-6">
-                                    <a href=""> {{ $group->name }} </a>
+                                    <a href="{{ route("group.show-group-posts", $group) }}"> {{ $group->name }} </a>
                                 </div>
                             </div>
                         @endforeach

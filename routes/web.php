@@ -57,6 +57,9 @@ Route::group(['middleware'=>'auth'], static function (){
     Route::post('/group/{group}/{user}/invite/', [GroupController::class, 'invite'])->name('group.invite');
     Route::post('/group/{group_invite}/accept/', [GroupController::class, 'acceptInvite'])->name('group.accept-invite');
     Route::post('/group/{group_invite}/reject/', [GroupController::class, 'rejectInvite'])->name('group.reject-invite');
+    Route::get('/group/{group}/show-group-posts/', [GroupController::class, 'showGroupPosts'])->name('group.show-group-posts');
+    Route::post('/group/{group}/create-group-post/', [GroupController::class, 'createGroupPost'])->name('group.create-group-post');
+    Route::post('/group-post/{group_post}/delete-group-post/', [GroupController::class, 'deleteGroupPost'])->name('group.delete-group-post');
 });
 
 Auth::routes();

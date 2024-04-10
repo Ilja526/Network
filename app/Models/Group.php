@@ -18,4 +18,8 @@ class Group extends Model
     public function groupInvites(): HasMany{
         return $this->hasMany(GroupInvite::class);
     }
+
+    public function groupPosts(): HasMany{
+        return $this->hasMany(GroupPost::class);
+    }
 }
