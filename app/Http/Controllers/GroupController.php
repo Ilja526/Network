@@ -85,7 +85,7 @@ class GroupController extends Controller
             return redirect()->back()->with('error', 'access denied');
 
         }
-        $groupInvite->group->users()->sync([$this->user->id]);
+        $groupInvite->group->users()->attach($this->user->id);
         $groupInvite->delete();
         return redirect()->route("friend.search");
     }
