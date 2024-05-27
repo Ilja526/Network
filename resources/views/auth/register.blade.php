@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="wrapper">
                 <div class="logo">
-                    <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt="">
+                    <img src="https://cdn.icon-icons.com/icons2/50/PNG/256/ning_social_10631.png" alt="">
                 </div>
 
                 <div class="text-center mt-4 name">
