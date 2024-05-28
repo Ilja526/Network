@@ -29,10 +29,11 @@
                                 <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image">
-
+                                    <label class="btn btn-primary">
+                                        Upload Image<input id="image" type="file" class="form-control d-none @error('image') is-invalid @enderror" name="image">
+                                    </label>
                                     @error('image')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
